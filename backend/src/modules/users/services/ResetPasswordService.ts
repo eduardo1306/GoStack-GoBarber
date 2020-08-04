@@ -18,15 +18,15 @@ class SendForgotPasswordEmailService {
     @inject('UsersRepository')
     private usersRepository: IUserRepository,
 
-    @inject('UserTokenRepository')
-    private userTokenRepository: IUserTokenRepository,
+    @inject('UsersTokenRepository')
+    private usersTokenRepository: IUserTokenRepository,
 
     @inject('HashProvider')
     private hashProvider: IHashProvider,
   ) {}
 
   public async execute({ password, token }: IRequest): Promise<void> {
-    const userToken = await this.userTokenRepository.findByToken(token);
+    const userToken = await this.usersTokenRepository.findByToken(token);
 
     if (!userToken) {
       throw new AppError('User token does not exist');
