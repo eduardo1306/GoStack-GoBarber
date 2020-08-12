@@ -5,6 +5,18 @@ import User from '@modules/users/infra/typeorm/entities/User';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 
 class FakeUsersRepository implements IUserRepository {
+  public async findAllProviders(
+    except_user_id?: string | undefined,
+  ): Promise<User[]> {
+    let { users } = this;
+
+    if (except_user_id) {
+      users = this.users.filter(user => user.id !== except_user_id);
+    }
+
+    return users;
+  }
+
   private users: User[] = [];
 
   public async findById(id: string): Promise<User | undefined> {
