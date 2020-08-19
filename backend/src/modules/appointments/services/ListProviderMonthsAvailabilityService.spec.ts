@@ -1,17 +1,16 @@
-// import AppError from '@shared/errors/AppError';
-import ListProvidersMonthsAvaliabilityService from './ListProvidersMonthsAvaliabilityService';
+import ListProviderMonthsAvailabilityService from './ListProviderMonthsAvailabilityService';
 import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentsRepository';
 
-let listProvidersMonthsAvaliability: ListProvidersMonthsAvaliabilityService;
+let listProviderMonthsAvailabilityService: ListProviderMonthsAvailabilityService;
 let fakeAppointmentsRepository: FakeAppointmentsRepository;
-describe('ListProviders', () => {
+describe('ListProvidersMonth', () => {
   beforeEach(() => {
     fakeAppointmentsRepository = new FakeAppointmentsRepository();
-    listProvidersMonthsAvaliability = new ListProvidersMonthsAvaliabilityService(
+    listProviderMonthsAvailabilityService = new ListProviderMonthsAvailabilityService(
       fakeAppointmentsRepository,
     );
   });
-  it('should be able to list providers months avaliability', async () => {
+  it('should be able to list providers months availability', async () => {
     await fakeAppointmentsRepository.create({
       date: new Date(2020, 4, 20, 8, 0, 0),
       provider_id: 'user',
@@ -58,13 +57,13 @@ describe('ListProviders', () => {
       provider_id: 'user',
     });
 
-    const avaliability = await listProvidersMonthsAvaliability.execute({
+    const availability = await listProviderMonthsAvailabilityService.execute({
       provider_id: 'user',
       year: 2020,
       month: 5,
     });
 
-    expect(avaliability).toEqual(
+    expect(availability).toEqual(
       expect.arrayContaining([
         { day: 19, available: true },
         { day: 20, available: false },
