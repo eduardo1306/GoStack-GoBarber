@@ -1,5 +1,6 @@
 [
   {
+    "name": "default",
     "type": "postgres",
     "host": "localhost",
     "port": 5432,
@@ -13,7 +14,7 @@
     }
   },
   {
-    "name": "gobarber_mongodb",
+    "name": "mongo",
     "type": "mongodb",
     "host": "localhost",
     "port": 27017,

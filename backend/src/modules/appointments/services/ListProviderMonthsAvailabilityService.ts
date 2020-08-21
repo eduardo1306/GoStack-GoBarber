@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 import { getDaysInMonth, getDate } from 'date-fns';
 
-import IAppointmentsRepository from '../repositories/IAppointmensRepository';
+import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 
 interface IRequest {
   provider_id: string;

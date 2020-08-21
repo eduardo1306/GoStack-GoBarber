@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 
-import IAppointmentsRepository from '../repositories/IAppointmensRepository';
+import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 import Appointments from '../infra/typeorm/entities/Appointments';
 
 interface IRequest {
