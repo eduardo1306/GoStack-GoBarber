@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import multer from 'multer';
-import uploadConfig from '@config/upload';
+import { celebrate, Segments, Joi } from 'celebrate';
 
+import uploadConfig from '@config/upload';
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 import UsersController from '../controller/UsersController';
 import UserAvatarController from '../controller/UserAvatarController';
@@ -16,6 +17,13 @@ usersRouter.patch(
   '/avatar',
   ensureAuthenticated,
   upload.single('avatar'),
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      email: Joi.string().email().required(),
+      password: Joi.string().required(),
+    },
+  }),
   userAvatarController.update,
 );
 
