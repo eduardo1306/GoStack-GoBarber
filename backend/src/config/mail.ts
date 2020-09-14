@@ -1,6 +1,5 @@
 interface IMailConfig {
   driver: 'ethereal' | 'sparkpost';
-
   defaults: {
     from: {
       email: string;
@@ -10,8 +9,7 @@ interface IMailConfig {
 }
 
 export default {
-  driver: process.env.MAIL_DRIVER || 'ethereal',
-
+  driver: process.env.MAIL_DRIVER || 'ethereal' || 'sparkpost',
   defaults: {
     from: {
       email: 'testing@sparkpostbox.com',
