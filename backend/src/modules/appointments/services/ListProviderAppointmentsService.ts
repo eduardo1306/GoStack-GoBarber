@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import ICacheProvider from '@shared/container/providers/CacheProviders/models/ICacheProvider';
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
@@ -29,6 +30,7 @@ export default class ListProviderAppointmentsService {
     day,
   }: IRequest): Promise<Appointments[]> {
     const cacheKey = `provider-appointments:${provider_id}-${year}-${month}-${day}`;
+
     let appointments = await this.cacheProvider.recover<Appointments[]>(
       cacheKey,
     );
@@ -43,7 +45,7 @@ export default class ListProviderAppointmentsService {
         },
       );
 
-      await this.cacheProvider.save(cacheKey, appointments);
+      await this.cacheProvider.save(cacheKey, classToClass(appointments));
     }
 
     return appointments;
