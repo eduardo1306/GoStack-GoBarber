@@ -80,7 +80,7 @@ const ResetPassword: React.FC = () => {
         });
       }
     },
-    [history, addToast],
+    [history, addToast, location.search],
   );
 
   return (
