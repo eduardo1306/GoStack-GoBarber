@@ -159,6 +159,11 @@ export const Section = styled.section`
     padding-bottom: 16px;
     margin-bottom: 16px;
   }
+
+  > p {
+    color: #999591;
+    font-weight: 300;
+  }
 `;
 
 export const Appointment = styled.div`
@@ -282,9 +287,4 @@ export const Calendar = styled.aside`
     border-radius: 10px;
     color: #232129 !important;
   }
-`;
-
-export const NoAppointmentsAdvice = styled.h5`
-  color: #999591;
-  font-weight: 300;
 `;
