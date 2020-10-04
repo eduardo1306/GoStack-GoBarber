@@ -6,6 +6,7 @@ import { FiClock, FiPower } from 'react-icons/fi';
 import DayPicker, { DayModifiers } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
+import { parseISO } from 'date-fns/esm';
 import { useAuth } from '../../hooks/auth';
 import {
   Container,
@@ -18,6 +19,7 @@ import {
   NextAppointment,
   Section,
   Appointment,
+  NoAppointmentsAdvice,
 } from './styles';
 
 import logoImg from '../../assets/logo.svg';
@@ -31,6 +33,7 @@ interface IMonthAvailability {
 interface IAppointments {
   id: string;
   date: string;
+  hourFormatted: string;
   user: {
     name: string;
     avatar_url: string;
@@ -72,7 +75,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     api
-      .get('/appointments/me', {
+      .get<IAppointments[]>('/appointments/me', {
         params: {
           year: selectedDate.getFullYear(),
           month: selectedDate.getMonth() + 1,
@@ -80,7 +83,13 @@ const Dashboard: React.FC = () => {
         },
       })
       .then(response => {
-        setAppointments(response.data);
+        const appointmentsFormatted = response.data.map(appointment => {
+          return {
+            ...appointment,
+            hourFormatted: format(parseISO(appointment.date), 'HH:mm'),
+          };
+        });
+        setAppointments(appointmentsFormatted);
       });
   }, [selectedDate]);
 
@@ -129,6 +138,17 @@ const Dashboard: React.FC = () => {
     }
   }, [selectedDate]);
 
+  const morningAppointments = useMemo(() => {
+    return appointments.filter(appointment => {
+      return parseISO(appointment.date).getHours() < 12;
+    });
+  }, [appointments]);
+
+  const afternoonAppointments = useMemo(() => {
+    return appointments.filter(appointment => {
+      return parseISO(appointment.date).getHours() > 12;
+    });
+  }, [appointments]);
   return (
     <Container>
       <Header>
@@ -180,61 +200,51 @@ const Dashboard: React.FC = () => {
           <Section>
             <strong>Manhã</strong>
 
-            <Appointment>
-              <span>
-                <FiClock />
-                08:00
-              </span>
-              <div>
-                <img
-                  src="https://avatars2.githubusercontent.com/u/49220311?s=460&u=85d2f26357b4215393d9fbe437af324c67d84a81&v=4"
-                  alt="Eduardo Ferreira"
-                />
-                <strong>Eduardo Ferreira</strong>
-              </div>
-            </Appointment>
-            <Appointment>
-              <span>
-                <FiClock />
-                08:00
-              </span>
-              <div>
-                <img
-                  src="https://avatars2.githubusercontent.com/u/49220311?s=460&u=85d2f26357b4215393d9fbe437af324c67d84a81&v=4"
-                  alt="Eduardo Ferreira"
-                />
-                <strong>Eduardo Ferreira</strong>
-              </div>
-            </Appointment>
+            {morningAppointments.length <= 0 ? (
+              <NoAppointmentsAdvice>
+                Nenhum agendamento disponível
+              </NoAppointmentsAdvice>
+            ) : (
+              morningAppointments.map(appointment => (
+                <Appointment key={appointment.id}>
+                  <span>
+                    <FiClock />
+                    {appointment.hourFormatted}
+                  </span>
+                  <div>
+                    <img
+                      src={appointment.user.avatar_url}
+                      alt={appointment.user.name}
+                    />
+                    <strong>{appointment.user.name}</strong>
+                  </div>
+                </Appointment>
+              ))
+            )}
           </Section>
           <Section>
             <strong>Tarde</strong>
-            <Appointment>
-              <span>
-                <FiClock />
-                08:00
-              </span>
-              <div>
-                <img
-                  src="https://avatars2.githubusercontent.com/u/49220311?s=460&u=85d2f26357b4215393d9fbe437af324c67d84a81&v=4"
-                  alt="Eduardo Ferreira"
-                />
-                <strong>Eduardo Ferreira</strong>
-              </div>
-            </Appointment>
-            <Appointment>
-              <span>
-                <FiClock />
-                08:00
-              </span>
-              <div>
-                <img
-                  src="https://avatars2.githubusercontent.com/u/49220311?s=460&u=85d2f26357b4215393d9fbe437af324c67d84a81&v=4"
-                  alt="Eduardo Ferreira"
-                />
-                <strong>Eduardo Ferreira</strong>
-              </div>
-            </Appointment>
+            {afternoonAppointments.length <= 0 ? (
+              <NoAppointmentsAdvice>
+                Nenhum agendamento disponível
+              </NoAppointmentsAdvice>
+            ) : (
+              afternoonAppointments.map(appointment => (
+                <Appointment key={appointment.id}>
+                  <span>
+                    <FiClock />
+                    {appointment.hourFormatted}
+                  </span>
+                  <div>
+                    <img
+                      src={appointment.user.avatar_url}
+                      alt={appointment.user.name}
+                    />
+                    <strong>{appointment.user.name}</strong>
+                  </div>
+                </Appointment>
+              ))
+            )}
           </Section>
         </Schedule>
         <Calendar>
