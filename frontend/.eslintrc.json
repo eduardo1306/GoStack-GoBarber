@@ -36,6 +36,7 @@
     "import/prefer-default-export": "off",
     "import/no-duplicates": "off",
     "import/no-unresolved": "off",
+    "jsx-a11y/label-has-associated-control": "off",
     "@typescript-eslint/interface-name-prefix": "off",
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/explicit-function-return-type": [
