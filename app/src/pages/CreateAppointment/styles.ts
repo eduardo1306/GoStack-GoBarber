@@ -31,7 +31,7 @@ export const BackButton = styled.TouchableOpacity``;
 
 export const HeaderTitle = styled.Text`
   color: #f4ede8;
-  /* font-family: 'RobotoSlab-Medium'; */
+  font-family: 'RobotoSlab-Medium';
   font-size: 20px;
   margin-left: 16px;
 `;
@@ -68,8 +68,32 @@ export const ProviderAvatar = styled.Image`
 
 export const ProviderName = styled.Text<IProviderNameProps>`
   margin-left: 8px;
-  /* font-family: 'RobotoSlab-Medium'; */
+  font-family: 'RobotoSlab-Medium';
 
   font-size: 16px;
   color: ${props => (props.selected ? '#232129' : '#f4ede8')};
+`;
+
+export const OpenDatePickerButton = styled(RectButton)`
+  height: 46px;
+  background: #ff9000;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 24px;
+`;
+
+export const Calendar = styled.View``;
+
+export const Title = styled.Text`
+  font-family: 'RobotoSlab-Medium';
+  color: #f3ede8;
+  font-size: 24px;
+  margin: 0 24px 24px;
+`;
+
+export const OpenDatePickerText = styled.Text`
+  font-family: 'RobotoSlab-Medium';
+  color: #232129;
+  font-size: 16px;
 `;

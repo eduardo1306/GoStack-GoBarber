@@ -22,13 +22,13 @@ export const Header = styled.View`
 export const HeaderTitle = styled.Text`
   color: #f4ede8;
   font-size: 20px;
-  /* font-family: 'RobotoSlab-Regular'; */
+  font-family: 'RobotoSlab-Regular';
   line-height: 28px;
 `;
 
 export const UserName = styled.Text`
   color: #ff9000;
-  /* font-family: 'RobotoSlab-Medium'; */
+  font-family: 'RobotoSlab-Medium';
 `;
 
 export const ProfileButton = styled.TouchableOpacity``;
@@ -63,7 +63,7 @@ export const ProviderInfo = styled.View`
 `;
 
 export const ProviderName = styled.Text`
-  /* font-family: 'RobotoSlab-Medium'; */
+  font-family: 'RobotoSlab-Medium';
 
   font-size: 18px;
   color: #f4ede8;
@@ -78,12 +78,12 @@ export const ProviderMeta = styled.View`
 export const ProviderMetaText = styled.Text`
   margin-left: 8px;
   color: #999591;
-  /* font-family: 'RobotoSlab-Regular'; */
+  font-family: 'RobotoSlab-Regular';
 `;
 
 export const ProvidersListTitle = styled.Text`
   font-size: 24px;
   margin-bottom: 24px;
   color: #f4ede8;
-  /* font-family: 'RobotoSlab-Medium'; */
+  font-family: 'RobotoSlab-Medium';
 `;
