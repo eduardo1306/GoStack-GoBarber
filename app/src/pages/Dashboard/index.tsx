@@ -31,7 +31,7 @@ export interface IProvider {
 
 const Dashboard: React.FC = () => {
   const [providers, setProviders] = useState<IProvider[]>([]);
-  const { signOut, user } = useAuth();
+  const { user } = useAuth();
 
   const { navigate } = useNavigation();
 
@@ -42,8 +42,8 @@ const Dashboard: React.FC = () => {
   }, []);
 
   const navigateToProfile = useCallback(() => {
-    signOut();
-  }, [signOut]);
+    navigate('Profile');
+  }, [navigate]);
 
   const navigateToAppointment = useCallback(
     (providerId: string) => {
