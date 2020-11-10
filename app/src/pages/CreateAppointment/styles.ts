@@ -145,6 +145,17 @@ export const HourText = styled.Text<IHourTextProps>`
   font-size: 16px;
 `;
 
-export const CreateAppointmentButton = styled(RectButton)``;
+export const CreateAppointmentButton = styled(RectButton)`
+  height: 50px;
+  background: #ff9000;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 24px 24px;
+`;
 
-export const CreateAppointmentText = styled.Text``;
+export const CreateAppointmentButtonText = styled.Text`
+  font-family: 'RobotoSlab-Medium';
+  color: #232129;
+  font-size: 18px;
+`;
