@@ -62,8 +62,16 @@ const SignUp: React.FC = () => {
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
+
           formRef.current?.setErrors(errors);
+
+          return;
         }
+
+        Alert.alert(
+          'Erro no cadastro',
+          'Ocorreu um erro ao fazer o cadastro. Tente novamente.',
+        );
       }
     },
     [navigation],

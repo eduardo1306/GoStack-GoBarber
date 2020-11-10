@@ -26,6 +26,7 @@ interface IAuthContext {
   loading: boolean;
   signIn: (credentials: SignInCredentials) => Promise<void>;
   signOut: () => void;
+  updateUser: (user: IUser) => Promise<void>;
 }
 
 interface AuthState {
@@ -57,6 +58,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
     loadStoragedData();
   }, []);
+
   const signIn = useCallback(
     async ({ email, password }: SignInCredentials): Promise<void> => {
       const response = await api.post('sessions', {
@@ -78,13 +80,27 @@ const AuthProvider: React.FC = ({ children }) => {
     [],
   );
 
+  const updateUser = useCallback(
+    async (user: IUser) => {
+      setData({
+        token: data.token,
+        user,
+      });
+
+      await AsyncStorage.setItem('@GoBarber:user', JSON.stringify(user));
+    },
+    [setData, data.token],
+  );
+
   const signOut = useCallback(async () => {
     await AsyncStorage.multiRemove(['@GoBarber:user', '@GoBarber:token']);
 
     setData({} as AuthState);
   }, []);
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut, loading }}>
+    <AuthContext.Provider
+      value={{ user: data.user, signIn, signOut, loading, updateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
