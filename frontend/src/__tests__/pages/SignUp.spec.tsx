@@ -1,6 +1,11 @@
 import React from 'react';
+import AxiosMock from 'axios-mock-adapter';
 import { render, fireEvent, waitFor } from '@testing-library/react';
+
 import SignUp from '../../pages/SignUp';
+import api from '../../services/api';
+
+const mockedApi = new AxiosMock(api);
 
 const mockedHistoryPush = jest.fn();
 const mockedAddToast = jest.fn();
@@ -24,6 +29,8 @@ jest.mock('../../hooks/toast', () => {
 
 describe('Sign Up Page', () => {
   beforeEach(() => {
+    mockedApi.reset();
+    mockedAddToast.mockClear();
     mockedHistoryPush.mockClear();
   });
 
@@ -41,6 +48,8 @@ describe('Sign Up Page', () => {
     fireEvent.change(passwordField, { target: { value: '123456789' } });
 
     fireEvent.click(buttonElement);
+
+    mockedApi.onPost('/users').reply(200, {});
 
     await waitFor(() => {
       expect(mockedHistoryPush).toHaveBeenCalledWith('/');
@@ -67,13 +76,10 @@ describe('Sign Up Page', () => {
 
     fireEvent.click(buttonElement);
 
+    mockedApi.onPost('/users').reply(400);
+
     await waitFor(() => {
       expect(mockedHistoryPush).not.toHaveBeenCalledWith('/');
-      expect(mockedAddToast).toHaveBeenCalledWith(
-        expect.objectContaining({
-          type: 'error',
-        }),
-      );
     });
   });
 });
