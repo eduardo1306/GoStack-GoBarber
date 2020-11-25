@@ -30,6 +30,7 @@
     "yup": "^0.29.3"
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^3.4.2",
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.0",
     "@types/yup": "^0.29.3",
@@ -45,7 +46,8 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.0",
     "jest-environment-jsdom-sixteen": "^1.0.3",
-    "prettier": "^2.0.4"
+    "prettier": "^2.0.4",
+    "react-test-renderer": "^17.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

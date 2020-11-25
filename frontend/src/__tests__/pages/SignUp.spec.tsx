@@ -27,7 +27,7 @@ jest.mock('../../hooks/toast', () => {
   };
 });
 
-describe('Sign Up Page', () => {
+describe('SignUp Page', () => {
   beforeEach(() => {
     mockedApi.reset();
     mockedAddToast.mockClear();
