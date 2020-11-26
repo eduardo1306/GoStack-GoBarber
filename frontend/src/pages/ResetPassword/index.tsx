@@ -51,6 +51,7 @@ const ResetPassword: React.FC = () => {
         if (!token) {
           throw new Error('Algo inesperado aconteceu!');
         }
+        console.log('passou');
 
         await api.post('/password/reset', {
           password,

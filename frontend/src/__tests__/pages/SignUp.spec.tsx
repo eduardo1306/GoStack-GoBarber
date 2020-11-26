@@ -49,7 +49,7 @@ describe('SignUp Page', () => {
 
     fireEvent.click(buttonElement);
 
-    mockedApi.onPost('/users').reply(200, {});
+    mockedApi.onPost('/users').reply(200);
 
     await waitFor(() => {
       expect(mockedHistoryPush).toHaveBeenCalledWith('/');
