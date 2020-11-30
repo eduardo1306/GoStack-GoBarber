@@ -37,6 +37,7 @@ describe('Reset Password Page', () => {
     mockedApi.reset();
     mockedAddToast.mockClear();
     mockedHistoryPush.mockClear();
+    mockedToken.mockClear();
   });
 
   it('should be able to reset password', async () => {
@@ -47,7 +48,6 @@ describe('Reset Password Page', () => {
     });
 
     const { getByPlaceholderText, getByText } = render(<ResetPassword />);
-
     const passwordField = getByPlaceholderText('Nova senha...');
     const password_confirmationField = getByPlaceholderText(
       'Confirmação da senha...',
@@ -80,6 +80,7 @@ describe('Reset Password Page', () => {
         token: null,
       };
     });
+
     const { getByPlaceholderText, getByText } = render(<ResetPassword />);
 
     const passwordField = getByPlaceholderText('Nova senha...');
