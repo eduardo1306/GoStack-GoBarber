@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@types/sparkpost": "^2.1.4",
-    "aws-sdk": "^2.747.0",
+    "aws-sdk": "^2.814.0",
     "bcryptjs": "^2.4.3",
     "celebrate": "^12.2.0",
     "class-transformer": "^0.3.1",
